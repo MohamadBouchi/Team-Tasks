@@ -1,3 +1,86 @@
 .container-fluid {
     margin: 30px;
+    height: 70%;
 }
+
+.toolsbar {
+    margin: 30px;
+    background: white;
+    padding: 10px;
+}
+
+.left-sidebar, .right-sidebar {
+    background: white;
+}
+
+.dashboard {
+    height: 100%;
+}
+
+.open-tasks {
+    height: 100%;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.inprocess-tasks {
+    height: 100%;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.waiting-tasks {
+    height: 100%;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.finished-tasks {
+    height: 100%;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.open-tasks-title {
+    background: #80d8ff;
+}
+.inprocess-tasks-title {
+    background: #ffab91;
+}
+.waiting-tasks-title {
+    background: #fff176;
+}
+.finished-tasks-title {
+    background: #69f0ae;
+}
+.main-content h4{
+    margin: 0 0 5px 0;
+}
+
+.cards-container {
+    height: 97%;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+/* scrollbar ende */
