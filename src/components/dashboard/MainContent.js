@@ -14,11 +14,6 @@ export default function MainContent() {
                 <TaskCard></TaskCard>
                 <TaskCard></TaskCard>
                 <TaskCard></TaskCard>
-                <TaskCard></TaskCard>
-                <TaskCard></TaskCard>
-                <TaskCard></TaskCard>
-                <TaskCard></TaskCard>
-                <TaskCard></TaskCard>
             </div>
         </Grid>
         <Grid item md={3} className="inprocess-tasks">
