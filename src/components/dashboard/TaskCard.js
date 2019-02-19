@@ -28,7 +28,6 @@ const onDragStart = (e) => {
         };
     let stringData = JSON.stringify(data);
     e.dataTransfer.setData('text',stringData);
-    console.log(stringData)
   }
   const { classes } = props;
   return (

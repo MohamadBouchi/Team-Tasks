@@ -1,26 +1,27 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import TaskCard from './TaskCard';
-import { tasks } from '../../store/actions/tasksAction';
+import { getTasks, updateTaskStatus } from '../../store/actions/tasksAction';
 import { connect } from 'react-redux';
 
 class MainContent extends React.Component  {
 
     componentWillMount(){
-        this.props.tasks();
+        this.props.getTasks();
     }
-
-
+    onDragOver = (e) => {
+      e.preventDefault();
+    }
     onDrop = (e, newStatus) => {
         e.preventDefault();
         const stringData = JSON.parse(e.dataTransfer.getData("text"));
-        console.log(stringData)
+        this.props.updateTaskStatus(stringData.id, newStatus)
     }
     
     render(){
         return (
           <Grid container item md={8} spacing={0} justify="center" className="main-content">
-              <Grid item md={3} className="open-tasks" onDrop={(e) =>this.onDrop(e, 'finished')}>
+              <Grid item md={3} className="open-tasks" onDrop={(e) =>this.onDrop(e, 'open')} onDragOver={(e) =>this.onDragOver(e)}>
                   <h4 className="open-tasks-title">open ({this.props.open.length})</h4>
                   <div className="cards-container">
                     { this.props.open.map( task =>
@@ -28,7 +29,7 @@ class MainContent extends React.Component  {
                     )}
                   </div>
               </Grid>
-              <Grid item md={3} className="inprocess-tasks" onDragOver={(e) =>console.log(e)}>
+              <Grid item md={3} className="inprocess-tasks" onDrop={(e) =>this.onDrop(e, 'inprocess')} onDragOver={(e) =>this.onDragOver(e)}>
                   <h4 className="inprocess-tasks-title">in process ({this.props.inprocess.length})</h4>
                   <div className="cards-container">
                     { this.props.inprocess.map( task =>
@@ -36,7 +37,7 @@ class MainContent extends React.Component  {
                     )}
                   </div>
               </Grid>
-              <Grid item md={3} className="waiting-tasks">
+              <Grid item md={3} className="waiting-tasks" onDrop={(e) =>this.onDrop(e, 'waiting')} onDragOver={(e) =>this.onDragOver(e)}>
                   <h4 className="waiting-tasks-title">waiting ({this.props.waiting.length})</h4>
                   <div className="cards-container">
                     { this.props.waiting.map( task =>
@@ -44,7 +45,7 @@ class MainContent extends React.Component  {
                     )}
                   </div>
               </Grid>
-              <Grid item md={3} className="finished-tasks">
+              <Grid item md={3} className="finished-tasks" onDrop={(e) =>this.onDrop(e, 'finished')} onDragOver={(e) =>this.onDragOver(e)}>
                   <h4 className="finished-tasks-title">finished ({this.props.finished.length})</h4>
                   <div className="cards-container">
                     { this.props.finished.map( task =>
@@ -60,7 +61,8 @@ class MainContent extends React.Component  {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      tasks: () => dispatch(tasks())
+      getTasks: () => dispatch(getTasks()),
+      updateTaskStatus: (id, newStatus) => dispatch(updateTaskStatus(id, newStatus))
     }
   }
   

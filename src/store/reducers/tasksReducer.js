@@ -5,9 +5,9 @@ const initState = {
     waiting: [],
     finished: []
 };
-const authReducer = (state = initState, action) => {
+const taskReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'TASKS':
+        case 'GET_TASKS':
             const open = action.payload.filter(task => {
                 if (task.status === 'open') return task;
                 else return null;
@@ -35,4 +35,4 @@ const authReducer = (state = initState, action) => {
             return state;
     }
 }
-export default authReducer;
+export default taskReducer;
