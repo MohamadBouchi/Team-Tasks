@@ -3,11 +3,15 @@ import Grid from '@material-ui/core/Grid';
 import TaskCard from './TaskCard';
 import { getTasks, updateTaskStatus } from '../../store/actions/tasksAction';
 import { connect } from 'react-redux';
-
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:4000');
 class MainContent extends React.Component  {
 
     componentWillMount(){
-        this.props.getTasks();
+      this.props.getTasks();
+    }
+    componentDidMount(){
+      socket.on('update', () => this.props.getTasks());
     }
     onDragOver = (e) => {
       e.preventDefault();
@@ -15,9 +19,11 @@ class MainContent extends React.Component  {
     onDrop = (e, newStatus) => {
         e.preventDefault();
         const stringData = JSON.parse(e.dataTransfer.getData("text"));
-        this.props.updateTaskStatus(stringData.id, newStatus)
+        this.props.updateTaskStatus(stringData.id, newStatus);
+        setTimeout(()=>{
+          socket.emit('update', null); 
+        },500);
     }
-    
     render(){
         return (
           <Grid container item md={8} spacing={0} justify="center" className="main-content">

@@ -11,4 +11,8 @@ var io = socket(server);
 
 io.on('connection', function(socket){
     console.log('connected');
-})
+
+    socket.on('update', function(data){
+        socket.broadcast.emit('update', null);
+    });
+});
