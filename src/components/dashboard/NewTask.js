@@ -3,80 +3,95 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import { newTask } from '../../store/actions/tasksAction';
 
 const styles = {
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto'
-  },
   newTask: {
-    float: 'right'
+    float: 'right',
+    marginTop: '15px',
   },
-  newTaskBtn: {
+  newTaskForm: {
+    padding: '25px 25px 40px 25px'
+  },
+  textField: {
+    marginLeft: '5px',
+    marginRight: '5px',
+    width: '350px'
+  },
+  formAction: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  formSubmit: {
+    alignSelf: 'flex-end'
   }
 };
 
 class NewTask extends React.Component {
   state = {
     bottom: false,
+    task_title: '',
+    task_link: '',
+    task_detail: ''
   };
 
-  toggleDrawer = (side, open) => () => {
+  toggleDrawer = (open) => () => {
     this.setState({
-      [side]: open,
+      'bottom': open
     });
   };
 
+  handleChange = (evt) => {
+    this.setState({ [evt.target.name]: evt.target.value });
+  }
+  submitHandler = (e) => {
+      e.preventDefault();
+      this.props.newTask(this.state.task_title, this.state.task_link, this.state.task_detail);
+  }
   render() {
     const { classes } = this.props;
 
-    const fullList = (
-      <div className={classes.fullList}>
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    );
-
     return (
       <div className={classes.newTask}>
-        <Button onClick={this.toggleDrawer('bottom', true)} className={classes.newTaskBtn}>Open Bottom</Button>
+        <Button onClick={this.toggleDrawer(true)} variant="contained" className={classes.newTaskBtn}>New Task</Button>
         <Drawer
           anchor="bottom"
           open={this.state.bottom}
-          onClose={this.toggleDrawer('bottom', false)}
-        >
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer('bottom', false)}
-            onKeyDown={this.toggleDrawer('bottom', false)}
-          >
-            {fullList}
-          </div>
+          onClose={this.toggleDrawer(false)}>
+          <form className={classes.newTaskForm}>
+            <TextField
+              onChange={this.handleChange}
+              className={classes.textField}
+              name='task_title'
+              required={true}
+              id="task-title"
+              label="title"
+              margin="normal"/>
+
+            <TextField
+              onChange={this.handleChange}
+              className={classes.textField}
+              id="task-link"
+              label="Link"
+              name='task_link'
+              margin="normal"/>
+              <br/>
+            
+          <div className={classes.formAction}>
+          <TextField
+              onChange={this.handleChange}
+              name='task_detail'
+              className={classes.textField}
+              id="task-detail"
+              label="detail"
+              multiline
+              rows="3"
+              margin="normal"/>
+            <Button variant="contained" onClick={this.submitHandler} className={classes.formSubmit} color="primary">New Task</Button>
+            </div>
+          </form>
         </Drawer>
       </div>
     );
@@ -87,4 +102,10 @@ NewTask.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NewTask);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    newTask: (task_title, task_link, task_detail) => dispatch(newTask(task_title, task_link, task_detail))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(NewTask));

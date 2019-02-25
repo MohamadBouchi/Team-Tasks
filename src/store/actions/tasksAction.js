@@ -4,7 +4,6 @@ export const getTasks = () => {
         .then(response => {
             return response.json();
         }).then(data => {
-            console.log(data)
             // if(data.tasks.length !== 0)
               dispatch({ type: "GET_TASKS", payload: data });
         });
@@ -24,8 +23,25 @@ export const updateTaskStatus = (task_id, new_status, user_id) => {
         }).then(response => {
             return response.json();
         }).then(data => {
-            console.log(data)
             dispatch({ type: "GET_TASKS", payload: data });
         });
     };
 }
+
+export const newTask = (task_title, task_link, task_detail) => {
+    return (dispatch) => {
+        fetch('https://apex.cc-west.de/ords/tasks/tasksapp/tasks', {
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                task_title: `${task_title}`,
+                task_detail: `${task_detail}`,
+                task_link: `${task_link}`,
+                }
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            dispatch({ type: "AFTER_INSERT", payload: data });
+        });
+    };
+};

@@ -58,9 +58,12 @@ function TaskCard(props) {
             <Typography variant="subheading" className={classes.taskDetail}>
               {props.task.detail}
             </Typography>
-            <Typography variant="overline" className={classes.changeDate}>
-              {change_date}
-            </Typography>
+            { props.task.status!=='open' && 
+              <Typography variant="overline" className={classes.changeDate}>
+                {change_date}
+              </Typography>
+            }
+            
             <Typography variant="overline" className={classes.dueDate}>
               {due_date}
             </Typography>

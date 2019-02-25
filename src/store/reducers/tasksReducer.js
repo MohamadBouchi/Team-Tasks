@@ -7,18 +7,26 @@ const initState = {
     loading: true
 };
 const taskReducer = (state = initState, action) => {
+    let open, inprocess, waiting, finished = [];
     switch (action.type) {
         case 'GET_TASKS':
-            const open = action.payload.open_tasks;
-            const inprocess = action.payload.inprocess_tasks;
-            const waiting = action.payload.waiting_tasks;
-            const finished = action.payload.finished_tasks;
+            open = action.payload.open_tasks;
+            inprocess = action.payload.inprocess_tasks;
+            waiting = action.payload.waiting_tasks;
+            finished = action.payload.finished_tasks;
             return {
                 ...state,
                 open,
                 inprocess,
                 waiting,
                 finished,
+                loading: false
+            };
+        case 'AFTER_INSERT':
+            open = action.payload.open_tasks;
+            return {
+                ...state,
+                open,
                 loading: false
             };
         default:
