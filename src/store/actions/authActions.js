@@ -1,6 +1,6 @@
 export const login = (user_name, password) => {
     return (dispatch) => {
-        fetch('https://apex.cc-west.de/ords/mbouchi/tasksapp/user', { 
+        fetch('https://apex.cc-west.de/ords/tasks/tasksapp/user', { 
         method: 'GET',
         headers: {
             'Accept': 'application/json',

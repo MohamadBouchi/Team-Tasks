@@ -13,8 +13,8 @@ class App extends Component {
         <React.Fragment>
           <Navbar/>
           <Switch>
-            { this.props.user_name && <Route exact path="/" component={Login} />}
-            { !this.props.user_name && <Route exact path="/" component={Dashboard} />}
+            { !this.props.user_name && <Route exact path="/" component={Login} />}
+            { this.props.user_name && <Route exact path="/" component={Dashboard} />}
           </Switch>
         </React.Fragment>
       </Router>
@@ -23,7 +23,7 @@ class App extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-      user_name: state.user_name
+      user_name: state.auth.user_name
   }
 }
 

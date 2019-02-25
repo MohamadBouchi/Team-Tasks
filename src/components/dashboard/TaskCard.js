@@ -34,26 +34,26 @@ const styles = {
 
 function TaskCard(props) {
   
-const onDragStart = (e) => {
-    let data = {
-            id: props.task.id,
-            status: props.task.status
-        };
-    let stringData = JSON.stringify(data);
-    e.dataTransfer.setData('text',stringData);
-  }
+  const onDragStart = (e) => {
+      let data = {
+              task_id: props.task.id,
+              status: props.task.status
+          };
+      let stringData = JSON.stringify(data);
+      e.dataTransfer.setData('text',stringData);
+    }
   const { classes } = props;
   let change_date = new Date (props.task.change_date);
   let due_date = new Date (props.task.due_date);
-  change_date = change_date.getFullYear() + "-" + change_date.getMonth()+1 + '-' + change_date.getDate();
-  due_date = due_date.getFullYear() + "-" + due_date.getMonth()+1 + '-' + due_date.getDate();
+  change_date = change_date.getFullYear() + "." + change_date.getMonth()+1 + '.' + change_date.getDate();
+  due_date = due_date.getFullYear() + "." + due_date.getMonth()+1 + '.' + due_date.getDate();
 
   return (
     <Card draggable onDragStart={(e) => onDragStart(e)} className={classes.taskCard}>
         <CardContent className={classes.cardContent}>
             <Typography  color="textSecondary">
               {props.task.title}
-              <img src="images/timo.png" width="30" height="30" className={classes.userImg} alt=""/>
+              <img src={`images/${props.user_name}.png`} width="30" height="30" className={classes.userImg} alt=""/>
             </Typography>
             <Typography variant="subheading" className={classes.taskDetail}>
               {props.task.detail}
