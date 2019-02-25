@@ -28,7 +28,7 @@ export const updateTaskStatus = (task_id, new_status, user_id) => {
     };
 }
 
-export const newTask = (task_title, task_link, task_detail) => {
+export const newTask = (task_title, task_link, task_detail, due_date) => {
     return (dispatch) => {
         fetch('https://apex.cc-west.de/ords/tasks/tasksapp/tasks', {
             method:'POST',
@@ -37,6 +37,7 @@ export const newTask = (task_title, task_link, task_detail) => {
                 task_title: `${task_title}`,
                 task_detail: `${task_detail}`,
                 task_link: `${task_link}`,
+                due_date: `${due_date}`,
                 }
         }).then(response => {
             return response.json();

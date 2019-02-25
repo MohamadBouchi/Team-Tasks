@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import { newTask } from '../../store/actions/tasksAction';
+import { DatePicker } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const styles = {
   newTask: {
@@ -34,7 +37,12 @@ class NewTask extends React.Component {
     bottom: false,
     task_title: '',
     task_link: '',
-    task_detail: ''
+    task_detail: '',
+    selectedDate: new Date().toISOString()
+  };
+
+  handleDateChange = date => {
+    this.setState({ selectedDate: date });
   };
 
   toggleDrawer = (open) => () => {
@@ -48,11 +56,11 @@ class NewTask extends React.Component {
   }
   submitHandler = (e) => {
       e.preventDefault();
-      this.props.newTask(this.state.task_title, this.state.task_link, this.state.task_detail);
+      this.props.newTask(this.state.task_title, this.state.task_link, this.state.task_detail, this.state.selectedDate.toISOString());
   }
   render() {
     const { classes } = this.props;
-
+    const { selectedDate } = this.state;
     return (
       <div className={classes.newTask}>
         <Button onClick={this.toggleDrawer(true)} variant="contained" className={classes.newTaskBtn}>New Task</Button>
@@ -60,7 +68,7 @@ class NewTask extends React.Component {
           anchor="bottom"
           open={this.state.bottom}
           onClose={this.toggleDrawer(false)}>
-          <form className={classes.newTaskForm}>
+          <form className={classes.newTaskForm} onSubmit={this.submitHandler}>
             <TextField
               onChange={this.handleChange}
               className={classes.textField}
@@ -77,6 +85,14 @@ class NewTask extends React.Component {
               label="Link"
               name='task_link'
               margin="normal"/>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                margin="normal"
+                label="Due to"
+                value={selectedDate}
+                onChange={this.handleDateChange}
+              />
+              </MuiPickersUtilsProvider>
               <br/>
             
           <div className={classes.formAction}>
@@ -89,7 +105,7 @@ class NewTask extends React.Component {
               multiline
               rows="3"
               margin="normal"/>
-            <Button variant="contained" onClick={this.submitHandler} className={classes.formSubmit} color="primary">New Task</Button>
+            <Button variant="contained" type="submit" className={classes.formSubmit} color="primary">New Task</Button>
             </div>
           </form>
         </Drawer>
@@ -104,7 +120,7 @@ NewTask.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    newTask: (task_title, task_link, task_detail) => dispatch(newTask(task_title, task_link, task_detail))
+    newTask: (task_title, task_link, task_detail, due_date) => dispatch(newTask(task_title, task_link, task_detail, due_date))
   }
 }
 
