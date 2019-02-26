@@ -77,15 +77,15 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
   
-  const mapStateToProps = (state) => {
-    return {
-        open: state.tasks.open,
-        inprocess: state.tasks.inprocess,
-        waiting: state.tasks.waiting,
-        finished: state.tasks.finished,
-        loading: state.tasks.loading,
-        user_id: state.auth.user_id
-    }
+const mapStateToProps = (state) => {
+  return {
+      open: state.tasks.open,
+      inprocess: state.tasks.inprocess,
+      waiting: state.tasks.waiting,
+      finished: state.tasks.finished,
+      loading: state.tasks.loading,
+      user_id: state.auth.user_id
   }
+}
   
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);
