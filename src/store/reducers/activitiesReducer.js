@@ -8,19 +8,18 @@ const activitiesReducer = (state = initState, action) => {
     switch (action.type) {
         case 'GET_ACTIVITIES':
             activities = action.payload.activity;
-            console.log(activities)
             return {
                 ...state,
                 activities,
                 loading: false
             };
-        // case 'AFTER_INSERT':
-        //     open = action.payload.open_tasks;
-        //     return {
-        //         ...state,
-        //         open,
-        //         loading: false
-        //     };
+        case 'AFTER_INSERT_ACTIVITY':
+            activities = action.payload.activity;
+            return {
+                ...state,
+                activities,
+                loading: false
+            };
         default:
             return state;
     }

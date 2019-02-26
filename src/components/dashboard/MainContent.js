@@ -2,16 +2,17 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import TaskCard from './TaskCard';
 import { getTasks, updateTaskStatus } from '../../store/actions/tasksAction';
+import { newActivity } from '../../store/actions/activitiesAction';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
-const socket = io.connect('http://10.10.11.70:4000');
+// import io from 'socket.io-client';
+// const socket = io.connect('http://10.10.11.70:4000');
 class MainContent extends React.Component  {
 
     componentWillMount(){
       this.props.getTasks();
     }
     componentDidMount(){
-      socket.on('update', () => this.props.getTasks());
+      this.props.socket.on('update', () => this.props.getTasks());
     }
     onDragOver = (e) => {
       e.preventDefault();
@@ -22,7 +23,8 @@ class MainContent extends React.Component  {
         if(stringData.status !== new_status) {
           this.props.updateTaskStatus(stringData.task_id, new_status, this.props.user_id);
           setTimeout(()=>{
-            socket.emit('update', null); 
+            this.props.newActivity(this.props.user_id, stringData.task_id);
+            this.props.socket.emit('update', null); 
           },500);
         }
     }
@@ -73,7 +75,8 @@ class MainContent extends React.Component  {
 const mapDispatchToProps = (dispatch) => {
     return {
       getTasks: () => dispatch(getTasks()),
-      updateTaskStatus: (task_id, new_status, user_id) => dispatch(updateTaskStatus(task_id, new_status, user_id))
+      updateTaskStatus: (task_id, new_status, user_id) => dispatch(updateTaskStatus(task_id, new_status, user_id)),
+      newActivity: (task_id, user_id) => dispatch(newActivity(task_id, user_id))
     }
   }
   

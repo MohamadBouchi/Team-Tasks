@@ -9,6 +9,9 @@ class LeftSideBar extends React.Component {
   componentWillMount(){
     this.props.getActivities();
   }
+  componentDidMount(){
+    this.props.socket.on('update', () => this.props.getActivities());
+  }
   render(){
     if(!this.props.loading){
       return (
