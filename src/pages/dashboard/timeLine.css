@@ -1,0 +1,26 @@
+.timeline--animate{
+    padding: 15px 0px 0px 7px !important;
+    margin: 0px !important;
+    height: 100%;
+}
+.timeline--wrapper{
+    padding: 0 12px 14px 12px !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 98%;
+}
+.body-container {
+    box-shadow: none !important;
+}
+.entry .body{
+    margin: 0 0 1em !important;
+}
+
+.entry .body p{
+    margin: 7px 0 7px 0 !important;
+}
+
+.timeline-item-dateinner{
+    text-indent: 2px !important;
+    font-size: 11px !important;
+}

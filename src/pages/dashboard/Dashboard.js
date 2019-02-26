@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import './dashboard.css';
+import './timeLine.css';
 import ToolsBar from '../../components/dashboard/ToolsBar';
 import LeftSideBar from '../../components/dashboard/LeftSideBar';
 import MainContent from '../../components/dashboard/MainContent';
