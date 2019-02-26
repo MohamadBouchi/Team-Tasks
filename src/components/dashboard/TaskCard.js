@@ -43,10 +43,8 @@ function TaskCard(props) {
       e.dataTransfer.setData('text',stringData);
     }
   const { classes } = props;
-  let change_date = new Date (props.task.change_date);
-  let due_date = new Date (props.task.due_date);
-  change_date = change_date.getFullYear() + '.' + change_date.getMonth()+1 + '.' + change_date.getDate();
-  due_date = due_date.getFullYear() + '.' + (due_date.getMonth()+1) + '.' + due_date.getDate();
+  let change_date = props.task.change_date;
+  let due_date = props.task.due_date;
   return (
     <Card draggable onDragStart={(e) => onDragStart(e)} className={classes.taskCard}>
         <CardContent className={classes.cardContent}>

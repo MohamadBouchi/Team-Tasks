@@ -56,7 +56,9 @@ class NewTask extends React.Component {
   }
   submitHandler = (e) => {
       e.preventDefault();
-      this.props.newTask(this.state.task_title, this.state.task_link, this.state.task_detail, this.state.selectedDate.toISOString());
+      let due_date =new Date (this.state.selectedDate);
+      due_date = due_date.getFullYear() + '.' + (due_date.getMonth()+1) + '.' + due_date.getDate();
+      this.props.newTask(this.state.task_title, this.state.task_link, this.state.task_detail, due_date);
   }
   render() {
     const { classes } = this.props;
@@ -105,7 +107,7 @@ class NewTask extends React.Component {
               multiline
               rows="3"
               margin="normal"/>
-            <Button variant="contained" type="submit" className={classes.formSubmit} color="primary">New Task</Button>
+            <Button variant="contained" type="submit" className={classes.formSubmit} color="primary">Create</Button>
             </div>
           </form>
         </Drawer>
