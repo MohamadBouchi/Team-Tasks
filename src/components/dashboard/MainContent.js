@@ -23,7 +23,7 @@ class MainContent extends React.Component  {
         if(stringData.status !== new_status) {
           this.props.updateTaskStatus(stringData.task_id, new_status, this.props.user_id);
           setTimeout(()=>{
-            this.props.newActivity(this.props.user_id, stringData.task_id);
+            this.props.newActivity(this.props.user_id, stringData.task_id, new_status);
             this.props.socket.emit('update', null); 
           },500);
         }
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
       getTasks: () => dispatch(getTasks()),
       updateTaskStatus: (task_id, new_status, user_id) => dispatch(updateTaskStatus(task_id, new_status, user_id)),
-      newActivity: (task_id, user_id) => dispatch(newActivity(task_id, user_id))
+      newActivity: (task_id, user_id, new_status) => dispatch(newActivity(task_id, user_id, new_status))
     }
   }
   
