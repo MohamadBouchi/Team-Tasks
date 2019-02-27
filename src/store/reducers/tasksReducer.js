@@ -29,6 +29,16 @@ const taskReducer = (state = initState, action) => {
                 open,
                 loading: false
             };
+        case 'SEARCH_TASK':
+            const search = action.payload;
+            open = state.open.filter( task => {
+                return task.title.includes(search)
+            });
+            return {
+                ...state,
+                open,
+                loading: false
+            };
         default:
             return state;
     }

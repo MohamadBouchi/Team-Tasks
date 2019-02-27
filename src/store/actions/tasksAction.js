@@ -46,3 +46,10 @@ export const newTask = (task_title, task_link, task_detail, due_date) => {
         });
     };
 };
+
+
+export const searchTask = (search) => {
+    return (dispatch) => {
+        dispatch({ type: "SEARCH_TASK", payload: search });
+    }
+}
