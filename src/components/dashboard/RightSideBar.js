@@ -31,6 +31,7 @@ function RightSideBar(props) {
   { name: 'B2', value: 80 },
   { name: 'B3', value: 40 },
   { name: 'B4', value: 30 },
+  
   { name: 'B5', value: 50 },
   { name: 'C1', value: 100 },
   { name: 'C2', value: 200 },
