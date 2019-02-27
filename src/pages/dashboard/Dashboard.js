@@ -7,7 +7,8 @@ import LeftSideBar from '../../components/dashboard/LeftSideBar';
 import MainContent from '../../components/dashboard/MainContent';
 import RightSideBar from '../../components/dashboard/RightSideBar';
 import io from 'socket.io-client';
-
+import withWidth from '@material-ui/core/withWidth';
+import { Hidden } from '@material-ui/core';
 const socket = io.connect('http://10.10.11.70:4000');
 
 function Dashboard() {
@@ -16,13 +17,13 @@ function Dashboard() {
       <ToolsBar></ToolsBar>
       <div className="container-fluid">
         <Grid container spacing={8} className="dashboard">
-          <LeftSideBar socket={socket}></LeftSideBar>
+          <Hidden lgDown><LeftSideBar socket={socket}></LeftSideBar></Hidden>
           <MainContent socket={socket}></MainContent>
-          <RightSideBar></RightSideBar>
+          <Hidden lgDown><RightSideBar></RightSideBar></Hidden>
         </Grid>
       </div>
     </React.Fragment>
   )
 }
 
-export default Dashboard;
+export default withWidth()(Dashboard);

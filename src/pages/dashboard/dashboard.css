@@ -12,7 +12,9 @@
 .left-sidebar, .right-sidebar {
     background: white;
 }
-
+.right-sidebar {
+    padding-top: 15px;
+}
 .dashboard {
     height: 100%;
 }
