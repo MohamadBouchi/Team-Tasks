@@ -12,7 +12,7 @@ export default function TimeLineEntry(props) {
         if (props.status === 'finished')
             statusColor = 'green'
         else if(props.status === 'waiting')
-            statusColor = 'yellow'
+            statusColor = '#ffeb3b'
         else if(props.status === 'inprocess')
             statusColor = 'orangered'
         else
