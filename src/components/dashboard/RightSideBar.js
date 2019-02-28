@@ -1,3 +1,7 @@
+
+//TODO: hide the 0 content
+/* EXPORT */
+
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';

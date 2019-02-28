@@ -1,3 +1,7 @@
+
+//TODO: redirect to login page if someone goes without login to dashboard
+/* EXPORT */
+
 import React, { Component } from 'react';
 import './App.css';
 import Login from './pages/auth/Login';

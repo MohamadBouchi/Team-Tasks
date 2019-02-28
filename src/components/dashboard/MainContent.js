@@ -1,3 +1,7 @@
+
+//TODO: add loading spanner
+/* EXPORT */
+
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import TaskCard from './TaskCard';
