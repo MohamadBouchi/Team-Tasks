@@ -1,3 +1,8 @@
+
+//FIXME: after clear search field the tasks are still filterd => must copy the state to the component
+
+/* EXPORT */
+
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import NewTask from './NewTask';
